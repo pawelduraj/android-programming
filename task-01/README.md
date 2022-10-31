@@ -17,8 +17,6 @@ docker stop android-t1
 Compose up, open shell:
 
 ```bash
-
-```bash
 docker compose -p android-t1 up
 docker exec -it android-t1-main bash
 ```
