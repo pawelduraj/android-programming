@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  main:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: 'android-t1-main'
+    stdin_open: true
+    tty: true
