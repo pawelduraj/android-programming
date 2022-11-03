@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CORS Test</title>
+</head>
+<body>
+Testing CORS...
+<script>
+    async function testCORS() {
+        try {
+            // noinspection HttpUrlsUsage
+            await fetch('http://' + location.hostname + ':8080/products');
+            console.log('CORS works!');
+            document.querySelector('body').innerHTML = 'CORS works!';
+        } catch (e) {
+            console.error(e);
+            document.querySelector('body').innerHTML = e;
+        }
+    }
+
+    testCORS();
+</script>
+</body>
+</html>
