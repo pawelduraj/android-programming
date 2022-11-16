@@ -2,5 +2,11 @@
 .gradle/
 gradle/
 build/
+captures/
 
 *.db
+*.iml
+.DS_Store
+.externalNativeBuild
+.cxx
+local.properties
