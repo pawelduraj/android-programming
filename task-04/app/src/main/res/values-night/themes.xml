@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Tasks" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/seabrook</item>
+        <item name="colorPrimaryVariant">@color/naval</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/mazarine_blue</item>
+        <item name="colorSecondaryVariant">@color/pico_void</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="actionBarStyle">@style/ActionBar</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="ActionBar" parent="Widget.MaterialComponents.ActionBar.Solid">
+        <item name="android:background">@color/seabrook</item>
+    </style>
+
+</resources>

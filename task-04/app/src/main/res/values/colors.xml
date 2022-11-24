@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="electromagnetic">#FF2F3640</color>
+    <color name="blue_nights">#FF353B48</color>
+    <color name="pico_void">#FF192a56</color>
+    <color name="mazarine_blue">#FF273C75</color>
+    <color name="naval">#FF40739E</color>
+    <color name="seabrook">#FF487EB0</color>
+</resources>
