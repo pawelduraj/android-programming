@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="free_speech_blue">#FF3C40C6</color>
+    <color name="dark_periwinkle">#FF575FCF</color>
+    <color name="green_teal">#FF05C46B</color>
+    <color name="minty_green">#FF0BE881</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
