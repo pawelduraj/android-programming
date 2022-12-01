@@ -1,12 +1,10 @@
+# IDE
 .idea/
+
+# Gradle and build files
 .gradle/
 gradle/
 build/
-captures/
 
+# Database
 *.db
-*.iml
-.DS_Store
-.externalNativeBuild
-.cxx
-local.properties
