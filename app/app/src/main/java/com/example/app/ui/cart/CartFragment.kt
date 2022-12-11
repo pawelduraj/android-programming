@@ -10,17 +10,14 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.app.*
+import com.example.app.ProductActivity
+import com.example.app.R
+import com.example.app.dao.Database
 import com.example.app.databinding.FragmentCartBinding
-import com.example.app.ui.products.ProductsAdapter
-import kotlin.math.roundToInt
+import com.example.app.models.CartProduct
 
 class CartFragment : Fragment() {
-
     private var _binding: FragmentCartBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -57,39 +54,40 @@ class CartAdapter(context: Context, cartProducts: List<CartProduct>) :
         val product = getItem(position) as CartProduct
 
         val rowView = inflater.inflate(R.layout.list_item_cart, parent, false)
-        rowView.setOnClickListener() {
+        rowView.setOnClickListener {
             val intent = Intent(context, ProductActivity::class.java)
-            intent.putExtra("name", product.product.name)
-            intent.putExtra("category", product.product.category)
-            intent.putExtra("price", product.product.price.toString())
-            intent.putExtra("description", product.product.description)
+            intent.putExtra("name", product.product?.name ?: "-")
+            intent.putExtra("category", product.product?.category?.name ?: "-")
+            intent.putExtra("price", ((product.product?.price ?: 0) / 100.0).toString())
+            intent.putExtra("description", product.product?.description ?: "-")
             context.startActivity(intent)
         }
 
         val nameTextView = rowView.findViewById(R.id.name) as TextView
-        nameTextView.text = product.product.name
+        nameTextView.text = product.product?.name ?: "-"
 
         val categoryTextView = rowView.findViewById(R.id.category) as TextView
-        categoryTextView.text = product.product.category
+        categoryTextView.text = product.product?.category?.name ?: "-"
 
         val priceTextView = rowView.findViewById(R.id.price) as TextView
-        priceTextView.text = product.quantity.toString() + " x " + product.product.price.toString()
+        priceTextView.text =
+            product.quantity.toString() + " x " + ((product.product?.price ?: 0) / 100.0).toString()
 
         val totalTextView = rowView.findViewById(R.id.total) as TextView
         totalTextView.text =
-            "= " + ((product.product.price * product.quantity * 100).roundToInt() / 100.0).toString()
+            " = " + (((product.product?.price ?: 0) * product.quantity) / 100.0).toString()
 
         val removeButton = rowView.findViewById(R.id.remove) as Button
         removeButton.setOnClickListener {
-            Cart.remove(product.product)
+            Database.removeFromCart(product.product!!, 1)
             this.notifyDataSetChanged()
         }
 
         val addButton = rowView.findViewById(R.id.add) as Button
-        if (product.quantity == product.product.maxQuantity)
+        if (product.quantity >= (product.product?.inStock ?: 0))
             addButton.isEnabled = false
         addButton.setOnClickListener {
-            if (!Cart.add(product.product, 1))
+            if (!Database.addToCart(product.product!!, 1))
                 Toast.makeText(context, "Cannot add more items", Toast.LENGTH_SHORT).show()
             this.notifyDataSetChanged()
         }

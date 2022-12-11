@@ -3,6 +3,8 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        // noinspection JcenterRepositoryObsolete - Realm is still on JCenter
+        // jcenter()
     }
 }
 
@@ -14,5 +16,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Cube Shop"
+rootProject.name = 'Cube Shop'
 include ':app'

@@ -11,7 +11,7 @@ List of all tasks (with links to solutions):
 3. [Calculator](task-03)
 4. [To-Do List](task-04)
 5. [Shop](app)
-6. Database
+6. [Database](app)
 7. Network
 8. Auth
 9. Payments

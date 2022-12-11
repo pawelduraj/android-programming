@@ -7,18 +7,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.app.Cart
-import com.example.app.Product
 import com.example.app.ProductActivity
 import com.example.app.R
+import com.example.app.dao.Database
 import com.example.app.databinding.FragmentProductsBinding
+import com.example.app.models.Product
 
 class ProductsFragment : Fragment() {
     private var _binding: FragmentProductsBinding? = null
@@ -59,11 +55,11 @@ class ProductsAdapter(context: Context, products: List<Product>) :
         val product = getItem(position) as Product
 
         val rowView = inflater.inflate(R.layout.list_item_products, parent, false)
-        rowView.setOnClickListener() {
+        rowView.setOnClickListener {
             val intent = Intent(context, ProductActivity::class.java)
             intent.putExtra("name", product.name)
-            intent.putExtra("category", product.category)
-            intent.putExtra("price", product.price.toString())
+            intent.putExtra("category", product.category?.name ?: "-")
+            intent.putExtra("price", (product.price / 100.0).toString())
             intent.putExtra("description", product.description)
             context.startActivity(intent)
         }
@@ -72,15 +68,16 @@ class ProductsAdapter(context: Context, products: List<Product>) :
         nameTextView.text = product.name
 
         val categoryTextView = rowView.findViewById(R.id.category) as TextView
-        categoryTextView.text = product.category
+        categoryTextView.text = product.category?.name ?: "-"
 
         val priceButton = rowView.findViewById(R.id.price) as Button
-        priceButton.text = product.price.toString()
+        priceButton.text = (product.price / 100.0).toString()
         priceButton.setOnClickListener {
-            if (Cart.add(product, 1))
+            if (Database.addToCart(product, 1))
                 Toast.makeText(context, "Added to cart", Toast.LENGTH_SHORT).show()
             else
                 Toast.makeText(context, "Max quantity reached", Toast.LENGTH_SHORT).show()
+            this.notifyDataSetChanged()
         }
 
         return rowView
