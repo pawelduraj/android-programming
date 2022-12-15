@@ -1,56 +1,129 @@
 package com.example.app.dao
 
-import com.example.app.models.*
+import android.os.StrictMode
+import com.example.app.models.CartProduct
+import com.example.app.models.Category
+import com.example.app.models.Product
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.query
 import io.realm.kotlin.query.RealmResults
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
+
+const val API_URL = "http://192.168.0.129:5000" // TODO move to env
+
+class KtorCategory {
+    val categoryId: Int = -1
+    val name: String = ""
+}
+
+class KtorProduct {
+    val productId: Int = -1
+    val name: String = ""
+    val categoryId: Int = -1
+    val price: Int = -1
+    val inStock: Int = -1
+    val description: String = ""
+}
 
 object Data {
     fun initDataIfEmpty(realm: Realm) {
-        if (!this.isEmpty(realm))
-            return
+        val mapper = jacksonObjectMapper()
+        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        StrictMode.setThreadPolicy(policy)
 
-        realm.writeBlocking {
-            val categoriesToDelete: RealmResults<Category> = this.query<Category>().find()
-            this.delete(categoriesToDelete)
+        var ktorCategories = mutableListOf<KtorCategory>()
+        var ktorProducts = mutableListOf<KtorProduct>()
 
-            val productsToDelete: RealmResults<Product> = this.query<Product>().find()
-            this.delete(productsToDelete)
+        try {
+            val categoriesURL = URL("$API_URL/categories")
+            val categoriesConnection = categoriesURL.openConnection() as HttpURLConnection
+            categoriesConnection.requestMethod = "GET"
+            categoriesConnection.setRequestProperty("Content-Type", "application/json")
+            categoriesConnection.setRequestProperty("Accept", "application/json")
+            BufferedReader(
+                InputStreamReader(categoriesConnection.inputStream, "utf-8")
+            ).use { br ->
+                val response = StringBuilder()
+                var responseLine: String?
+                while (br.readLine().also { responseLine = it } != null) {
+                    response.append(responseLine!!.trim { it <= ' ' })
+                }
+                ktorCategories = mapper.readValue(
+                    response.toString(),
+                    mapper.typeFactory.constructCollectionType(
+                        List::class.java,
+                        KtorCategory::class.java
+                    )
+                )
+            }
 
-            val cartProductsToDelete: RealmResults<CartProduct> = this.query<CartProduct>().find()
-            this.delete(cartProductsToDelete)
+            val productsURL = URL("$API_URL/products")
+            val productsConnection = productsURL.openConnection() as HttpURLConnection
+            productsConnection.requestMethod = "GET"
+            productsConnection.setRequestProperty("Content-Type", "application/json")
+            productsConnection.setRequestProperty("Accept", "application/json")
+            BufferedReader(
+                InputStreamReader(productsConnection.inputStream, "utf-8")
+            ).use { br ->
+                val response = StringBuilder()
+                var responseLine: String?
+                while (br.readLine().also { responseLine = it } != null) {
+                    response.append(responseLine!!.trim { it <= ' ' })
+                }
+                ktorProducts = mapper.readValue(
+                    response.toString(),
+                    mapper.typeFactory.constructCollectionType(
+                        List::class.java,
+                        KtorProduct::class.java
+                    )
+                )
+            }
 
-            val categories = listOf(Category("3x3x3"), Category("4x4x4"), Category("5x5x5"))
-            val copiedCategories: MutableList<Category> = mutableListOf()
-            categories.forEach { category -> copiedCategories.add(this.copyToRealm(category)) }
+            realm.writeBlocking {
+                // Remove old data
 
-            // @formatter:off
-            val products = listOf(
-                Product("Gan 13 M MagLev", copiedCategories[0], 7999, 1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-                Product("MoYu RS3 M 2020", copiedCategories[0], 899, 3, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-                Product("YuXin Little Magic", copiedCategories[0], 599, 3, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-                Product("DaYan TengYun M", copiedCategories[0], 2299, 3, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-                Product("YJ MGC", copiedCategories[1], 1999, 4, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-                Product("MoYu AoSu WR M", copiedCategories[1], 4399, 4, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-                Product("YJ MGC", copiedCategories[2], 2299, 5, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-                Product("YuXin Cloud", copiedCategories[2], 999, 5, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-                Product("MoYu AoChuang GTS M", copiedCategories[2], 3999, 5, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-            )
-            // @formatter:on
+                val categoriesToDelete: RealmResults<Category> = this.query<Category>().find()
+                this.delete(categoriesToDelete)
 
-            products.forEach { product -> this.copyToRealm(product) }
+                val productsToDelete: RealmResults<Product> = this.query<Product>().find()
+                this.delete(productsToDelete)
+
+                val cartProductsToDelete: RealmResults<CartProduct> =
+                    this.query<CartProduct>().find()
+                this.delete(cartProductsToDelete)
+
+                // Add data from API to Realm
+
+                val categories = mutableListOf<Category>()
+                ktorCategories.forEach() {
+                    categories.add(Category(it.categoryId, it.name))
+                }
+
+                val copiedCategories: MutableList<Category> = mutableListOf()
+                categories.forEach { category -> copiedCategories.add(this.copyToRealm(category)) }
+
+                val products = mutableListOf<Product>()
+                ktorProducts.forEach() {
+                    products.add(
+                        Product(
+                            it.productId,
+                            it.name,
+                            copiedCategories.find { category -> category.categoryId == it.categoryId }!!,
+                            it.price,
+                            it.inStock,
+                            it.description
+                        )
+                    )
+                }
+
+                products.forEach { product -> this.copyToRealm(product) }
+            }
+        } catch (e: Exception) {
+            println("Cannot load products: $e")
         }
-    }
-
-    private fun isEmpty(realm: Realm): Boolean {
-        var result = false
-
-        realm.writeBlocking {
-            val category = this.query<Category>().first().find()
-            val product = this.query<Product>().first().find()
-            result = category == null || product == null
-        }
-
-        return result
     }
 }

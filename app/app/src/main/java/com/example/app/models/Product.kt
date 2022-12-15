@@ -6,7 +6,7 @@ import io.realm.kotlin.types.annotations.PrimaryKey
 
 class Product() : RealmObject {
     @PrimaryKey
-    var productId: Int = RandomId.getProductId()
+    var productId: Int = 0
     var name: String = ""
     var category: Category? = null
     var price: Int = 0
@@ -14,12 +14,14 @@ class Product() : RealmObject {
     var description: String = ""
 
     constructor(
+        productId: Int,
         name: String,
         category: Category,
         price: Int,
         inStock: Int,
         description: String
     ) : this() {
+        this.productId = productId
         this.name = name
         this.category = category
         this.price = price

@@ -6,6 +6,12 @@
     app:startDestination="@+id/navigation_products">
 
     <fragment
+        android:id="@+id/navigation_categories"
+        android:name="com.example.app.ui.categories.CategoriesFragment"
+        android:label="@string/title_categories"
+        tools:layout="@layout/fragment_categories" />
+
+    <fragment
         android:id="@+id/navigation_products"
         android:name="com.example.app.ui.products.ProductsFragment"
         android:label="@string/title_products"

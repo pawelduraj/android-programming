@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.app.NewProductActivity
 import com.example.app.ProductActivity
 import com.example.app.R
 import com.example.app.dao.Database
@@ -35,6 +36,11 @@ class ProductsFragment : Fragment() {
         productsListView.adapter = productsAdapter
         productsViewModel.products.observe(viewLifecycleOwner) {
             productsAdapter.notifyDataSetChanged()
+        }
+
+        binding.floatingActionButton.setOnClickListener {
+            val intent = Intent(context, NewProductActivity::class.java)
+            startActivity(intent)
         }
 
         return root

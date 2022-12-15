@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Cube Shop</string>
+    <string name="title_categories">Categories</string>
     <string name="title_products">Products</string>
     <string name="title_cart">Cart</string>
 </resources>

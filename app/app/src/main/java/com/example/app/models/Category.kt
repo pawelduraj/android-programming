@@ -6,10 +6,11 @@ import io.realm.kotlin.types.annotations.PrimaryKey
 
 class Category() : RealmObject {
     @PrimaryKey
-    var categoryId: Int = RandomId.getCategoryId()
+    var categoryId: Int = 0
     var name: String = ""
 
-    constructor(name: String) : this() {
+    constructor(categoryId: Int, name: String) : this() {
+        this.categoryId = categoryId
         this.name = name
     }
 }
