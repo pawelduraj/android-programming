@@ -10,9 +10,9 @@ List of all tasks (with links to solutions):
 2. [Ktor](task-02)
 3. [Calculator](task-03)
 4. [To-Do List](task-04)
-5. [Shop](app)
-6. [Database](app)
-7. Network
+5. Shop([app](app), [server](server))
+6. Database([app](app), [server](server))
+7. Network([app](app), [server](server))
 8. Auth
 9. Payments
 10. Tests

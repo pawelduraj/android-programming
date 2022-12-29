@@ -15,6 +15,7 @@ object DatabaseFactory {
         transaction(database) {
             SchemaUtils.create(Categories)
             SchemaUtils.create(Products)
+            SchemaUtils.create(Users)
 
             if (Categories.selectAll().count() == 0.toLong()) {
                 for (category in SampleData().getCategories()) Categories.insert {
@@ -29,6 +30,14 @@ object DatabaseFactory {
                     it[price] = product.price
                     it[inStock] = product.inStock
                     it[description] = product.description
+                }
+
+                for (user in SampleData().getUsers()) Users.insert {
+                    it[userId] = user.userId
+                    it[name] = user.name
+                    it[email] = user.email
+                    it[password] = user.password
+                    it[admin] = user.admin
                 }
             }
         }

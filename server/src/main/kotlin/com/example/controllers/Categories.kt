@@ -1,14 +1,14 @@
 package com.example.controllers
 
+import com.example.DatabaseFactory.dbQuery
+import com.example.models.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-
-import com.example.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.*
-import com.example.models.*
 
 private fun resultRowToCategory(row: ResultRow) = Category(
     categoryId = row[Categories.categoryId],
@@ -41,59 +41,56 @@ private suspend fun deleteCategory(categoryId: Int): Boolean = dbQuery {
 
 fun Application.categoryRoutes() {
     routing {
-        post("/categories") {
-            val category = call.receive<Category>()
-            if (createCategory(category)) {
-                call.respondText("Category created")
-            } else {
-                call.respondText("Error creating category")
+        authenticate("auth-user") {
+            get("/categories") {
+                call.respond(readCategories())
+            }
+
+            get("/categories/{id}") {
+                val categoryId = call.parameters["id"]?.toIntOrNull()
+                if (categoryId != null) {
+                    val category = readCategory(categoryId)
+                    if (category != null)
+                        call.respond(category)
+                    else
+                        call.respondText("Category not found", status = io.ktor.http.HttpStatusCode.NotFound)
+                } else
+                    call.respondText("Invalid category id", status = io.ktor.http.HttpStatusCode.BadRequest)
             }
         }
 
-        get("/categories") {
-            call.respond(readCategories())
-        }
-
-        get("/categories/{id}") {
-            val categoryId = call.parameters["id"]?.toIntOrNull()
-            if (categoryId != null) {
-                val category = readCategory(categoryId)
-                if (category != null) {
-                    call.respond(category)
-                } else {
-                    call.respondText("Category not found", status = io.ktor.http.HttpStatusCode.NotFound)
-                }
-            } else {
-                call.respondText("Invalid category id", status = io.ktor.http.HttpStatusCode.BadRequest)
-            }
-        }
-
-        put("/categories/{id}") {
-            val categoryId = call.parameters["id"]?.toIntOrNull()
-            if (categoryId != null) {
+        authenticate("auth-admin") {
+            post("/categories") {
                 val category = call.receive<Category>()
-                category.categoryId = categoryId
-                val updatedCategory = updateCategory(category)
-                if (updatedCategory) {
-                    call.respondText("Category updated", status = io.ktor.http.HttpStatusCode.OK)
-                } else {
-                    call.respondText("Category not found", status = io.ktor.http.HttpStatusCode.NotFound)
-                }
-            } else {
-                call.respondText("Invalid category id", status = io.ktor.http.HttpStatusCode.BadRequest)
+                if (createCategory(category))
+                    call.respondText("Category created")
+                else
+                    call.respondText("Error creating category")
             }
-        }
 
-        delete("/categories/{id}") {
-            val categoryId = call.parameters["id"]?.toIntOrNull()
-            if (categoryId != null) {
-                if (deleteCategory(categoryId)) {
-                    call.respondText("Category deleted", status = io.ktor.http.HttpStatusCode.Accepted)
-                } else {
-                    call.respondText("Category not found", status = io.ktor.http.HttpStatusCode.NotFound)
-                }
-            } else {
-                call.respondText("Invalid category id", status = io.ktor.http.HttpStatusCode.BadRequest)
+            put("/categories/{id}") {
+                val categoryId = call.parameters["id"]?.toIntOrNull()
+                if (categoryId != null) {
+                    val category = call.receive<Category>()
+                    category.categoryId = categoryId
+                    val updatedCategory = updateCategory(category)
+                    if (updatedCategory)
+                        call.respondText("Category updated", status = io.ktor.http.HttpStatusCode.OK)
+                    else
+                        call.respondText("Category not found", status = io.ktor.http.HttpStatusCode.NotFound)
+                } else
+                    call.respondText("Invalid category id", status = io.ktor.http.HttpStatusCode.BadRequest)
+            }
+
+            delete("/categories/{id}") {
+                val categoryId = call.parameters["id"]?.toIntOrNull()
+                if (categoryId != null) {
+                    if (deleteCategory(categoryId))
+                        call.respondText("Category deleted", status = io.ktor.http.HttpStatusCode.Accepted)
+                    else
+                        call.respondText("Category not found", status = io.ktor.http.HttpStatusCode.NotFound)
+                } else
+                    call.respondText("Invalid category id", status = io.ktor.http.HttpStatusCode.BadRequest)
             }
         }
     }

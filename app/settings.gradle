@@ -3,8 +3,6 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
-        // noinspection JcenterRepositoryObsolete - Realm is still on JCenter
-        // jcenter()
     }
 }
 

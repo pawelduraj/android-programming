@@ -1,9 +1,12 @@
 package com.example
 
-import io.ktor.server.application.*
 import com.example.controllers.*
+import com.example.services.*
+import io.ktor.server.application.*
 
 fun Application.configureRouting() {
     productRoutes()
     categoryRoutes()
+    userRoutes()
+    authRoutes()
 }

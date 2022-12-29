@@ -26,4 +26,11 @@ class SampleData {
             // @formatter:on
         )
     }
+
+    fun getUsers(): List<User> {
+        return listOf(
+            User(1, "Admin", "admin@example.com", "admin", true),
+            User(2, "User", "user@example.com", "user", false)
+        )
+    }
 }

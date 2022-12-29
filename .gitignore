@@ -1,10 +1,2 @@
-# IDE
+### IDE ###
 .idea/
-
-# Gradle and build files
-.gradle/
-gradle/
-build/
-
-# Database
-*.db
