@@ -1,13 +1,13 @@
 package com.example.app
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.app.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,7 +26,12 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.navigation_categories, R.id.navigation_products, R.id.navigation_cart)
+            setOf(
+                R.id.navigation_categories,
+                R.id.navigation_products,
+                R.id.navigation_cart,
+                R.id.navigation_account
+            )
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)

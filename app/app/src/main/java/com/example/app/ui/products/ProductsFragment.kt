@@ -38,6 +38,8 @@ class ProductsFragment : Fragment() {
             productsAdapter.notifyDataSetChanged()
         }
 
+        if (Database.getUser() != null && Database.getUser()!!.admin)
+            binding.floatingActionButton.visibility = View.VISIBLE
         binding.floatingActionButton.setOnClickListener {
             val intent = Intent(context, NewProductActivity::class.java)
             startActivity(intent)

@@ -1,6 +1,5 @@
 package com.example.app.models
 
-import com.example.app.dao.RandomId
 import io.realm.kotlin.types.RealmObject
 import io.realm.kotlin.types.annotations.PrimaryKey
 

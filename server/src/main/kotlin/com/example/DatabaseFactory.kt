@@ -18,12 +18,12 @@ object DatabaseFactory {
             SchemaUtils.create(Users)
 
             if (Categories.selectAll().count() == 0.toLong()) {
-                for (category in SampleData().getCategories()) Categories.insert {
+                for (category in SampleData.getCategories()) Categories.insert {
                     it[categoryId] = category.categoryId
                     it[name] = category.name
                 }
 
-                for (product in SampleData().getProducts()) Products.insert {
+                for (product in SampleData.getProducts()) Products.insert {
                     it[productId] = product.productId
                     it[name] = product.name
                     it[categoryId] = product.categoryId
@@ -32,7 +32,7 @@ object DatabaseFactory {
                     it[description] = product.description
                 }
 
-                for (user in SampleData().getUsers()) Users.insert {
+                for (user in SampleData.getUsers()) Users.insert {
                     it[userId] = user.userId
                     it[name] = user.name
                     it[email] = user.email

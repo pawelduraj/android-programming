@@ -1,8 +1,8 @@
 package com.example.app
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.example.app.dao.Database
 
 class NewProductActivity : AppCompatActivity() {
@@ -25,6 +25,7 @@ class NewProductActivity : AppCompatActivity() {
             val description =
                 findViewById<EditText>(R.id.editTextMultilineDescription).text.toString()
             if (Database.addNewProduct(name, category, price, inStock, description)) {
+                Database.sync()
                 finish()
             } else {
                 Toast.makeText(this, "Cannot create product", Toast.LENGTH_SHORT).show()

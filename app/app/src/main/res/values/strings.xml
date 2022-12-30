@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Cube Shop</string>
+
+    <!-- Navigation -->
     <string name="title_categories">Categories</string>
     <string name="title_products">Products</string>
     <string name="title_cart">Cart</string>
+    <string name="title_account">Account</string>
+
+    <!-- Auth -->
+    <string name="auth_admin">Admin</string>
+    <string name="auth_user_id">User ID</string>
+    <string name="auth_name">Name</string>
+    <string name="auth_email">Email</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_sign_in">Sign In</string>
+    <string name="auth_sign_up">Sign Up</string>
+    <string name="auth_sign_out">Sign Out</string>
+    <string name="auth_sign_in_success">Sign In Success</string>
+    <string name="auth_sign_in_fail">Sign In Fail</string>
+    <string name="auth_sign_up_success">Sign Up Success</string>
+    <string name="auth_sign_up_fail">Sign Up Fail</string>
+    <string name="auth_sign_in_with_github">Sign In with GitHub</string>
+
+    <!-- Create new product -->
+    <string name="new_product_name">Name</string>
+    <string name="new_product_category">Category</string>
+    <string name="new_product_price">Price (in cents)</string>
+    <string name="new_product_in_stock">In stock</string>
+    <string name="new_product_description">Description</string>
+    <string name="new_product_create">CREATE NEW PRODUCT</string>
 </resources>

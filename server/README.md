@@ -3,35 +3,46 @@
 ---
 
 Server is running on port 5000. Server should be configured in the `/src/main/resources/application.conf` file.
-Look at the `application.conf` file for more information.
+Look at the `application.conf` file for more information. Remember to not commit sensitive information to the
+repository.
 
 ### Endpoints
 
 ---
 
-| URL               | HTTP     | Payload    | Description           |
-|-------------------|----------|------------|-----------------------|
-| `/auth/login`     | `POST`   | `login`    | Login a user          |
-| `/auth/register`  | `POST`   | `register` | Register a new user   |
-| `/categories`     | `POST`   | `category` | Create a new category |
-| `/categories`     | `GET`    |            | Get all categories    |
-| `/categories/:id` | `GET`    |            | Get a single category |
-| `/categories/:id` | `PUT`    | `category` | Update a category     |
-| `/categories/:id` | `DELETE` |            | Delete a category     |
-| `/products`       | `POST`   | `product`  | Create a new product  |
-| `/products`       | `GET`    |            | Get all products      |
-| `/products/:id`   | `GET`    |            | Get a single product  |
-| `/products/:id`   | `PUT`    | `product`  | Update a product      |
-| `/products/:id`   | `DELETE` |            | Delete a product      |
-| `/users`          | `POST`   | `user`     | Create a new user     |
-| `/users`          | `GET`    |            | Get all users         |
-| `/users/:id`      | `GET`    |            | Get a single user     |
-| `/users/:id`      | `PUT`    | `user`     | Update a user         |
-| `/users/:id`      | `DELETE` |            | Delete a user         |
+| URL               | HTTP     | Payload    | Description              |
+|-------------------|----------|------------|--------------------------|
+| `/auth/github`    | `POST`   | `token`    | Authenticate with GitHub |
+| `/auth/google`    | `POST`   | `token`    | Authenticate with Google |
+| `/auth/login`     | `POST`   | `login`    | Login a user             |
+| `/auth/register`  | `POST`   | `register` | Register a new user      |
+| `/categories`     | `POST`   | `category` | Create a new category    |
+| `/categories`     | `GET`    |            | Get all categories       |
+| `/categories/:id` | `GET`    |            | Get a single category    |
+| `/categories/:id` | `PUT`    | `category` | Update a category        |
+| `/categories/:id` | `DELETE` |            | Delete a category        |
+| `/products`       | `POST`   | `product`  | Create a new product     |
+| `/products`       | `GET`    |            | Get all products         |
+| `/products/:id`   | `GET`    |            | Get a single product     |
+| `/products/:id`   | `PUT`    | `product`  | Update a product         |
+| `/products/:id`   | `DELETE` |            | Delete a product         |
+| `/users`          | `POST`   | `user`     | Create a new user        |
+| `/users`          | `GET`    |            | Get all users            |
+| `/users/:id`      | `GET`    |            | Get a single user        |
+| `/users/:id`      | `PUT`    | `user`     | Update a user            |
+| `/users/:id`      | `DELETE` |            | Delete a user            |
 
 ### Payloads
 
 ---
+
+Token:
+
+```json
+{
+  "token": "string"
+}
+```
 
 Login:
 
@@ -89,6 +100,8 @@ User:
 
 All endpoints except
 
+- `/auth/github`
+- `/auth/google`
 - `/auth/login`
 - `/auth/register`
 

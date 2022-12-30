@@ -37,6 +37,7 @@ dependencies {
     implementation("io.ktor:ktor-server-cors:$ktorVersion")
 
     // Auth
+    implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
     implementation("io.ktor:ktor-server-auth:$ktorVersion")
     implementation("io.ktor:ktor-server-auth-jwt:$ktorVersion")
 
