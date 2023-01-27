@@ -14,11 +14,10 @@ List of all tasks (with links to solutions):
 6. Database ([app](app), [server](server))
 7. Network ([app](app), [server](server))
 8. Auth ([app](app), [server](server))
-9. Payments
+9. Payments ([app](app), [server](server))
 10. Tests
 11. Notifications
-12. React Native
 
 > More information about each task can be found in the corresponding folder.
 
-> Tasks 5-12 use the same server, tasks 5-11 use the same app.
+> Tasks 5-12 use the same server and the same app.

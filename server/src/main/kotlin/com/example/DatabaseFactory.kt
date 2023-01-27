@@ -16,6 +16,8 @@ object DatabaseFactory {
             SchemaUtils.create(Categories)
             SchemaUtils.create(Products)
             SchemaUtils.create(Users)
+            SchemaUtils.create(Orders)
+            SchemaUtils.create(OrderDetails)
 
             if (Categories.selectAll().count() == 0.toLong()) {
                 for (category in SampleData.getCategories()) Categories.insert {
@@ -38,6 +40,22 @@ object DatabaseFactory {
                     it[email] = user.email
                     it[password] = user.password
                     it[admin] = user.admin
+                }
+
+                for (order in SampleData.getOrders()) Orders.insert {
+                    it[orderId] = order.orderId
+                    it[userId] = order.userId
+                    it[date] = order.date
+                    it[price] = order.price
+                    it[paid] = order.paid
+                    it[payment] = order.payment
+                }
+
+                for (orderDetail in SampleData.getOrderDetails()) OrderDetails.insert {
+                    it[orderId] = orderDetail.orderId
+                    it[productId] = orderDetail.productId
+                    it[quantity] = orderDetail.quantity
+                    it[price] = orderDetail.price
                 }
             }
         }

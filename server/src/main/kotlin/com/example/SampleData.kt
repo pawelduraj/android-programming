@@ -34,4 +34,20 @@ object SampleData {
             User(-98, "User", "user@example.com", "user", false)
         )
     }
+
+    fun getOrders(): List<Order> {
+        return listOf(
+            Order(-99, -98, "2022-01-06 12:00:00", 9797, false, ""),
+            Order(-98, -98, "2022-01-06 13:00:00", 5997, true, "314159265358979323")
+        )
+    }
+
+    fun getOrderDetails(): List<OrderDetail> {
+        return listOf(
+            OrderDetail(-99, -99, 1, 7999),
+            OrderDetail(-99, -98, 2, 1798),
+            OrderDetail(-98, -91, 1, 3999),
+            OrderDetail(-98, -92, 2, 1998)
+        )
+    }
 }

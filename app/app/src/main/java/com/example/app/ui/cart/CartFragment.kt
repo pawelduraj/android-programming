@@ -36,6 +36,20 @@ class CartFragment : Fragment() {
             cartAdapter.notifyDataSetChanged()
         }
 
+        binding.buttonBuy.setOnClickListener {
+            if (Database.buy()) {
+                Toast.makeText(
+                    this.requireContext(),
+                    "Go to payments to complete your purchase",
+                    Toast.LENGTH_SHORT
+                ).show()
+                cartAdapter.notifyDataSetChanged()
+            } else {
+                Toast.makeText(this.requireContext(), "Something went wrong", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
         return root
     }
 

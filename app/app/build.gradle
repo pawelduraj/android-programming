@@ -74,8 +74,14 @@ dependencies {
     // Auth
     implementation 'com.google.android.gms:play-services-auth:20.4.0'
 
+    // Payments
+    implementation 'com.stripe:stripe-android:20.17.0'
+
+    // Map
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
     // Test
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

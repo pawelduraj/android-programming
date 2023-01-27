@@ -9,4 +9,6 @@ fun Application.configureRouting() {
     categoryRoutes()
     userRoutes()
     authRoutes()
+    paymentsRoutes()
+    orderRoutes()
 }

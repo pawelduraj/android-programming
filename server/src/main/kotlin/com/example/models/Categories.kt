@@ -6,7 +6,7 @@ import org.jetbrains.exposed.sql.*
 @Serializable
 data class Category(
     var categoryId: Int = -1,
-    val name: String
+    var name: String
 )
 
 object Categories : Table() {

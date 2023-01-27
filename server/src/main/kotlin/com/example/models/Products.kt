@@ -6,11 +6,11 @@ import org.jetbrains.exposed.sql.*
 @Serializable
 data class Product(
     var productId: Int = -1,
-    val name: String,
-    val categoryId: Int,
-    val price: Int,
-    val inStock: Int,
-    val description: String
+    var name: String,
+    var categoryId: Int,
+    var price: Int,
+    var inStock: Int,
+    var description: String
 )
 
 object Products : Table() {
@@ -18,8 +18,8 @@ object Products : Table() {
     val name = varchar("name", 64)
     val categoryId = integer("category_id").references(Categories.categoryId)
     val price = integer("price")
-    var inStock = integer("in_stock")
-    var description = varchar("description", 2048)
+    val inStock = integer("in_stock")
+    val description = varchar("description", 2048)
 
     override val primaryKey = PrimaryKey(productId)
 }

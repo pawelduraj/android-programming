@@ -18,6 +18,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.example.app.MapActivity
 import com.example.app.R
 import com.example.app.dao.Config
 import com.example.app.dao.Database
@@ -27,8 +28,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.concurrent.TimeUnit
-
 
 class AccountFragment : Fragment() {
     private var _binding: FragmentAccountBinding? = null
@@ -44,6 +45,10 @@ class AccountFragment : Fragment() {
     ): View {
         _binding = FragmentAccountBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        root.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener {
+            startActivity(Intent(context, MapActivity::class.java))
+        }
 
         root.findViewById<Button>(R.id.buttonChange).setOnClickListener {
             createNewAccount = !createNewAccount

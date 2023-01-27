@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_categories,
                 R.id.navigation_products,
                 R.id.navigation_cart,
-                R.id.navigation_account
+                R.id.navigation_account,
+                R.id.navigation_orders
             )
         )
 

@@ -29,4 +29,10 @@
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account" />
 
+    <fragment
+        android:id="@+id/navigation_orders"
+        android:name="com.example.app.ui.orders.OrdersFragment"
+        android:label="@string/title_orders"
+        tools:layout="@layout/fragment_orders" />
+
 </navigation>

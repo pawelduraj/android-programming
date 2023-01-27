@@ -6,10 +6,10 @@ import org.jetbrains.exposed.sql.*
 @Serializable
 data class User(
     var userId: Int = -1,
-    val name: String,
-    val email: String,
-    val password: String,
-    val admin: Boolean
+    var name: String,
+    var email: String,
+    var password: String,
+    var admin: Boolean
 )
 
 object Users : Table() {

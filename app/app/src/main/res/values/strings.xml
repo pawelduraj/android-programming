@@ -7,6 +7,8 @@
     <string name="title_products">Products</string>
     <string name="title_cart">Cart</string>
     <string name="title_account">Account</string>
+    <string name="title_orders">Orders</string>
+    <string name="title_map">Map</string>
 
     <!-- Auth -->
     <string name="auth_admin">Admin</string>
@@ -30,4 +32,22 @@
     <string name="new_product_in_stock">In stock</string>
     <string name="new_product_description">Description</string>
     <string name="new_product_create">CREATE NEW PRODUCT</string>
+
+    <!-- Buy -->
+    <string name="buy_button">BUY</string>
+    <string name="buy_success">Go to payments to pay for your order</string>
+    <string name="buy_fail">Something went wrong</string>
+
+    <!-- Pay -->
+    <string name="pay_button">PAY</string>
+    <string name="pay_stripe">Pay with Stripe</string>
+    <string name="pay_payu">Pay with PayU</string>
+    <string name="pay_success">Payment successful</string>
+    <string name="pay_fail">Something went wrong</string>
+
+    <!-- Orders -->
+    <string name="orders_order_id">Order ID</string>
+    <string name="orders_date">Date</string>
+    <string name="orders_price">Price</string>
+    <string name="orders_status">Status</string>
 </resources>

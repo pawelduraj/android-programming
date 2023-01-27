@@ -21,4 +21,9 @@
         android:icon="@drawable/ic_person_24dp"
         android:title="@string/title_account" />
 
+    <item
+        android:id="@+id/navigation_orders"
+        android:icon="@drawable/ic_payments_24dp"
+        android:title="@string/title_orders" />
+
 </menu>
