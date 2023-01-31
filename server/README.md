@@ -21,6 +21,7 @@ repository.
 | `/categories/:id`    | `GET`    |            | Get a single category    |
 | `/categories/:id`    | `PUT`    | `category` | Update a category        |
 | `/categories/:id`    | `DELETE` |            | Delete a category        |
+| `/contact`           | `POST`   | `message`  | Send message             |
 | `/me/orders`         | `GET`    |            | Get my orders            |
 | `/me/order-details`  | `GET`    |            | Get my order details     |
 | `/payments/buy`      | `POST`   | `buy`      | Creates new order        |
@@ -74,6 +75,14 @@ Category:
 ```json
 {
   "name": "string"
+}
+```
+
+Message:
+
+```json
+{
+  "message": "string"
 }
 ```
 

@@ -46,6 +46,10 @@ android {
         jvmTarget = '1.8'
     }
 
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
+
     buildFeatures {
         dataBinding = true
         viewBinding true
@@ -55,13 +59,13 @@ android {
 dependencies {
     // Android
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.google.android.material:material:1.8.0'
 
     // Realm
     // noinspection GradleDependency - Realm works only with this version
@@ -72,7 +76,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.14.0'
 
     // Auth
-    implementation 'com.google.android.gms:play-services-auth:20.4.0'
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
 
     // Payments
     implementation 'com.stripe:stripe-android:20.17.0'
@@ -82,6 +86,8 @@ dependencies {
 
     // Test
     testImplementation 'junit:junit:4.13.2'
+    testImplementation "io.mockk:mockk:1.13.3"
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation "io.mockk:mockk-android:1.13.3"
 }

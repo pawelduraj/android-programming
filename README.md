@@ -15,9 +15,15 @@ List of all tasks (with links to solutions):
 7. Network ([app](app), [server](server))
 8. Auth ([app](app), [server](server))
 9. Payments ([app](app), [server](server))
-10. Tests
-11. Notifications
+10. Tests ([app](app), [local test results](tests),
+    [join browserstack team](https://accounts.browserstack.com/jointeam/c376dc29737e43b09f6c07703937639c))
+11. Notifications ([app](app), [server](server))
 
 > More information about each task can be found in the corresponding folder.
 
-> Tasks 5-12 use the same server and the same app.
+> Tasks 5-11 use the same server and the same app.
+
+### Extra tasks
+
+- Map with pins ([app](app))
+- Flutter with lists of products and categories ([app](flutter_app), [server](server)) 

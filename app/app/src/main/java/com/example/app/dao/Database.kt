@@ -5,6 +5,7 @@ import com.example.app.models.*
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 import io.realm.kotlin.ext.query
+import io.realm.kotlin.query.RealmResults
 
 object Database {
     private val config = RealmConfiguration.Builder(
@@ -132,5 +133,23 @@ object Database {
         realm.query<Order>().find().forEach { orders.add(it) }
         orderDetails.clear()
         realm.query<OrderDetail>().find().forEach { orderDetails.add(it) }
+    }
+
+    fun clear() {
+        realm.writeBlocking {
+            val oldProducts: RealmResults<Product> = this.query<Product>().find()
+            this.delete(oldProducts)
+            val oldCategories: RealmResults<Category> = this.query<Category>().find()
+            this.delete(oldCategories)
+            val oldCartProducts: RealmResults<CartProduct> = this.query<CartProduct>().find()
+            this.delete(oldCartProducts)
+            val oldUsers: RealmResults<User> = this.query<User>().find()
+            this.delete(oldUsers)
+            val oldOrders: RealmResults<Order> = this.query<Order>().find()
+            this.delete(oldOrders)
+            val oldOrderDetails: RealmResults<OrderDetail> = this.query<OrderDetail>().find()
+            this.delete(oldOrderDetails)
+        }
+        this.sync()
     }
 }

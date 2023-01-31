@@ -14,7 +14,6 @@ import android.widget.*
 import com.example.app.dao.Config
 import com.example.app.dao.Database
 import com.example.app.models.Product
-import com.example.app.ui.orders.OrdersAdapter
 import com.stripe.android.PaymentConfiguration
 import com.stripe.android.paymentsheet.PaymentSheet
 import com.stripe.android.paymentsheet.PaymentSheetResult
@@ -43,7 +42,7 @@ class PaymentActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.price).text = "Price: ${price / 100.0}"
         findViewById<TextView>(R.id.status).text = "Status: ${if (paid) "Paid" else "Not paid"}"
 
-        val products = Database.getProductsByOrderId(orderId) as ArrayList<Product>
+        val products = Database.getProductsByOrderId(orderId)
         val orderProductsListView: ListView = findViewById(R.id.products)
         val orderProductsAdapter = OrderProductsAdapter(applicationContext, products)
         orderProductsListView.adapter = orderProductsAdapter

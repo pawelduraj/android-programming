@@ -45,3 +45,22 @@ To use google map you need to enable maps sdk for android. You can do it on
 need to create api key in google console. To create google maps api key go to
 `https://console.cloud.google.com/apis/credentials`. Then paste the key to
 `com.google.android.geo.API_KEY` in app manifest (`/app/src/main/AndroidManifest.xml`).
+
+### Tests
+
+---
+
+To build the app you need to run the following command:
+
+```bash
+gradlew assemble
+```
+
+To build test apk you need to run the following command:
+
+```bash
+gradlew assembleAndroidTest
+```
+
+To run tests on browserstack read instructions on the following page:
+`https://www.browserstack.com/docs/app-automate/espresso/getting-started`

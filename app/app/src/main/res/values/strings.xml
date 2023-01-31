@@ -50,4 +50,7 @@
     <string name="orders_date">Date</string>
     <string name="orders_price">Price</string>
     <string name="orders_status">Status</string>
+
+    <!-- Notifications -->
+    <string name="notification_contact_us">Contact us</string>
 </resources>

@@ -190,5 +190,9 @@ fun Application.authRoutes() {
                 call.respondText("Error", status = io.ktor.http.HttpStatusCode.InternalServerError)
             }
         }
+
+        post("/contact") {
+            call.respondText("OK", status = io.ktor.http.HttpStatusCode.OK)
+        }
     }
 }
